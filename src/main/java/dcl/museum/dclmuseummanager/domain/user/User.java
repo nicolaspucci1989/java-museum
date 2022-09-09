@@ -1,8 +1,15 @@
 package dcl.museum.dclmuseummanager.domain.user;
 
+import lombok.Builder;
+import lombok.Getter;
+import lombok.Setter;
+
+@Getter
+@Setter
+@Builder
 public class User {
-  String name;
-  String lastName;
-  String username;
-  String email;
+  private String name;
+  private String lastName;
+  private String username;
+  private String email;
 }
