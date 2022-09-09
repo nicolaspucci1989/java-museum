@@ -33,7 +33,7 @@ CREATE TABLE IF NOT EXISTS booth_artwork
     artwork_id BIGINT NOT NULL ,
     FOREIGN KEY (booth_id) REFERENCES booths (id),
     FOREIGN KEY (artwork_id) REFERENCES artworks (id)
-)
+);
 
 CREATE TABLE IF NOT EXISTS booth_user
 (
