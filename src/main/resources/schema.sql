@@ -27,6 +27,14 @@ CREATE TABLE IF NOT EXISTS artworks
     FOREIGN KEY (booth_id) REFERENCES booths (id)
 );
 
+CREATE TABLE IF NOT EXISTS booth_artwork
+(
+    booth_id BIGINT NOT NULL ,
+    artwork_id BIGINT NOT NULL ,
+    FOREIGN KEY (booth_id) REFERENCES booths (id),
+    FOREIGN KEY (artwork_id) REFERENCES artworks (id)
+)
+
 CREATE TABLE IF NOT EXISTS booth_user
 (
     booth_id BIGINT NOT NULL,
