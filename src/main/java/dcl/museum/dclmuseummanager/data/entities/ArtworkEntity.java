@@ -20,4 +20,8 @@ public class ArtworkEntity {
   private String nftAddress;
 
   private String name;
+
+  @ManyToOne
+  @JoinColumn(name="booth_id",nullable = false)
+  private BoothEntity booth;
 }

@@ -32,7 +32,7 @@ public class BoothEntity {
   @Column(name = "expires_at")
   private LocalDateTime expiresAt;
 
-  @OneToMany
+  @OneToMany(mappedBy = "booth")
   private List<ArtworkEntity> artworks;
 
   @ManyToMany
