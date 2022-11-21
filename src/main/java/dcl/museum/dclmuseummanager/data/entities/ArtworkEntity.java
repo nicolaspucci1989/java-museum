@@ -1,9 +1,6 @@
 package dcl.museum.dclmuseummanager.data.entities;
 
-import lombok.Builder;
-import lombok.Getter;
-import lombok.NoArgsConstructor;
-import lombok.Setter;
+import lombok.*;
 
 import javax.persistence.*;
 
@@ -13,6 +10,7 @@ import javax.persistence.*;
 @Setter
 @Builder
 @NoArgsConstructor
+@AllArgsConstructor
 public class ArtworkEntity {
   @Id
   @GeneratedValue(strategy = GenerationType.IDENTITY)

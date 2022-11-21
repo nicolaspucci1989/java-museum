@@ -40,7 +40,6 @@ public class BoothController {
   @Builder
   @Getter
   @Setter
-  @NoArgsConstructor
   public static class BoothListDto {
     private Long id;
     private String name;

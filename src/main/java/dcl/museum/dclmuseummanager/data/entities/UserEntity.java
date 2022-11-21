@@ -1,13 +1,10 @@
 package dcl.museum.dclmuseummanager.data.entities;
 
-import lombok.Builder;
-import lombok.Getter;
-import lombok.NoArgsConstructor;
-import lombok.Setter;
+import lombok.*;
 
 import javax.persistence.*;
 
-import static javax.persistence.GenerationType.*;
+import static javax.persistence.GenerationType.IDENTITY;
 
 @Entity
 @Table(name = "users")
@@ -15,6 +12,7 @@ import static javax.persistence.GenerationType.*;
 @Setter
 @Builder
 @NoArgsConstructor
+@AllArgsConstructor
 public class UserEntity {
   @Id
   @GeneratedValue(strategy = IDENTITY)
