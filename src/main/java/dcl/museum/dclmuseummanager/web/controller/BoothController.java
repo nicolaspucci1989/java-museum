@@ -1,5 +1,6 @@
 package dcl.museum.dclmuseummanager.web.controller;
 
+import dcl.museum.dclmuseummanager.domain.artwork.Artwork;
 import dcl.museum.dclmuseummanager.domain.booth.Booth;
 import dcl.museum.dclmuseummanager.domain.booth.BoothService;
 import lombok.*;
@@ -36,8 +37,24 @@ public class BoothController {
         .artistName(booth.getArtistName())
         .artistBio(booth.getArtistBio())
         .artistUrl(booth.getArtistUrl())
+        .artworks(artworksToDto(booth.getArtworks()))
         .build();
   }
+
+  private List<ArtworkDto> artworksToDto(List<Artwork> artworks) {
+    return artworks.stream()
+        .map(this::artworkToDto)
+        .collect(toList());
+  }
+
+  private ArtworkDto artworkToDto(Artwork artwork) {
+    return ArtworkDto.builder()
+        .id(artwork.getId())
+        .name(artwork.getName())
+        .nftAddress(artwork.getNftAddress())
+        .build();
+  }
+
   private List<BoothListDto> toListDto(List<Booth> booths) {
     return booths.stream()
         .map(this::toDto)
