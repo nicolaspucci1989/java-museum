@@ -5,6 +5,7 @@ import dcl.museum.dclmuseummanager.domain.booth.BoothService;
 import lombok.*;
 import org.springframework.http.ResponseEntity;
 import org.springframework.web.bind.annotation.GetMapping;
+import org.springframework.web.bind.annotation.PathVariable;
 import org.springframework.web.bind.annotation.RequestMapping;
 import org.springframework.web.bind.annotation.RestController;
 
@@ -23,6 +24,20 @@ public class BoothController {
     return ResponseEntity.ok().body(toListDto(boothService.findAll()));
   }
 
+  @GetMapping("/{id}")
+  public ResponseEntity<BoothDto> findById(@PathVariable Long id) throws Exception {
+    return ResponseEntity.ok(toDetailDto(boothService.findById(id)));
+  }
+
+  private BoothDto toDetailDto(Booth booth) {
+    return BoothDto.builder()
+        .id(booth.getId())
+        .name(booth.getName())
+        .artistName(booth.getArtistName())
+        .artistBio(booth.getArtistBio())
+        .artistUrl(booth.getArtistUrl())
+        .build();
+  }
   private List<BoothListDto> toListDto(List<Booth> booths) {
     return booths.stream()
         .map(this::toDto)
@@ -44,5 +59,25 @@ public class BoothController {
     private Long id;
     private String name;
     private String artistName;
+  }
+
+  @Builder
+  @Getter
+  @Setter
+  public static class ArtworkDto {
+    private Long id;
+    private String nftAddress;
+    private String name;
+  }
+  @Builder
+  @Getter
+  @Setter
+  public static class BoothDto{
+    private Long id;
+    private String name;
+    private String artistName;
+    private String artistBio;
+    private String artistUrl;
+    private List<ArtworkDto> artworks;
   }
 }

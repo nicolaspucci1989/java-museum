@@ -4,6 +4,8 @@ import lombok.*;
 
 import javax.persistence.*;
 
+import java.util.List;
+
 import static javax.persistence.GenerationType.IDENTITY;
 
 @Entity
@@ -26,4 +28,12 @@ public class UserEntity {
   private String username;
 
   private String email;
+
+  @ManyToMany
+  @JoinTable(
+      name="booths_users",
+      joinColumns = @JoinColumn(name = "user_id"),
+      inverseJoinColumns = @JoinColumn(name = "booth_id")
+  )
+  private List<BoothEntity> booths;
 }

@@ -35,6 +35,6 @@ public class BoothEntity {
   @OneToMany(mappedBy = "booth")
   private List<ArtworkEntity> artworks;
 
-  @ManyToMany
+  @ManyToMany(mappedBy = "booths")
   private List<UserEntity> guests;
 }
