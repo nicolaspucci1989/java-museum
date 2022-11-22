@@ -3,6 +3,7 @@ package dcl.museum.dclmuseummanager.web.controller;
 import dcl.museum.dclmuseummanager.domain.artwork.Artwork;
 import dcl.museum.dclmuseummanager.domain.booth.Booth;
 import dcl.museum.dclmuseummanager.domain.booth.BoothService;
+import dcl.museum.dclmuseummanager.domain.user.User;
 import lombok.*;
 import org.springframework.http.ResponseEntity;
 import org.springframework.web.bind.annotation.GetMapping;
@@ -38,6 +39,23 @@ public class BoothController {
         .artistBio(booth.getArtistBio())
         .artistUrl(booth.getArtistUrl())
         .artworks(artworksToDto(booth.getArtworks()))
+        .users(usersToDto(booth.getUsers()))
+        .build();
+  }
+
+  private List<UserDto> usersToDto(List<User> users) {
+    return users.stream()
+        .map(this::userToDto)
+        .collect(toList());
+  }
+
+  private UserDto userToDto(User user) {
+    return UserDto.builder()
+        .id(user.getId())
+        .name(user.getName())
+        .lastName(user.getLastName())
+        .email(user.getEmail())
+        .username(user.getUsername())
         .build();
   }
 
@@ -96,5 +114,17 @@ public class BoothController {
     private String artistBio;
     private String artistUrl;
     private List<ArtworkDto> artworks;
+    private List<UserDto> users;
+  }
+
+  @Builder
+  @Getter
+  @Setter
+  public static class UserDto {
+    private Long id;
+    private String name;
+    private String lastName;
+    private String email;
+    private String username;
   }
 }

@@ -5,6 +5,7 @@ import lombok.*;
 import javax.persistence.*;
 import java.time.LocalDateTime;
 import java.util.List;
+import java.util.Set;
 
 @Entity
 @Table(name = "booths")
@@ -35,6 +36,20 @@ public class BoothEntity {
   @OneToMany(mappedBy = "booth")
   private List<ArtworkEntity> artworks;
 
-  @ManyToMany(mappedBy = "booths")
-  private List<UserEntity> guests;
+  @ManyToMany
+  @JoinTable(name = "booths_users",
+      joinColumns = @JoinColumn(name = "booth_id", referencedColumnName = "id"),
+      inverseJoinColumns = @JoinColumn(name = "user_id", referencedColumnName = "id")
+  )
+  private Set<UserEntity> users = new java.util.LinkedHashSet<>();
+
+  public void addUser(UserEntity user) {
+    this.users.add(user);
+    user.getBooths().add(this);
+  }
+
+  public void removeUser(UserEntity user) {
+    users.remove(user);
+    user.getBooths().remove(this);
+  }
 }

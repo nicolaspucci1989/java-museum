@@ -20,5 +20,5 @@ public class Booth {
   private String artistUrl;
   private LocalDateTime expiresAt;
   private List<Artwork> artworks;
-  private List<User> guests;
+  private List<User> users;
 }

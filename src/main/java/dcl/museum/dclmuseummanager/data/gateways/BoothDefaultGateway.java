@@ -2,13 +2,16 @@ package dcl.museum.dclmuseummanager.data.gateways;
 
 import dcl.museum.dclmuseummanager.data.entities.ArtworkEntity;
 import dcl.museum.dclmuseummanager.data.entities.BoothEntity;
+import dcl.museum.dclmuseummanager.data.entities.UserEntity;
 import dcl.museum.dclmuseummanager.data.repositories.BoothRepository;
 import dcl.museum.dclmuseummanager.domain.artwork.Artwork;
 import dcl.museum.dclmuseummanager.domain.booth.Booth;
 import dcl.museum.dclmuseummanager.domain.booth.BoothGateway;
+import dcl.museum.dclmuseummanager.domain.user.User;
 import org.springframework.stereotype.Component;
 
 import java.util.List;
+import java.util.Set;
 
 import static java.util.stream.Collectors.toList;
 
@@ -69,6 +72,23 @@ public class BoothDefaultGateway implements BoothGateway {
         .artistUrl(boothEntity.getArtistUrl())
         .expiresAt(boothEntity.getExpiresAt())
         .artworks(artworksToModels(boothEntity.getArtworks()))
+        .users(usersToModels(boothEntity.getUsers()))
+        .build();
+  }
+
+  private List<User> usersToModels(Set<UserEntity> users) {
+    return users.stream()
+        .map(this::userToModel)
+        .collect(toList());
+  }
+
+  private User userToModel(UserEntity user) {
+    return User.builder()
+        .id(user.getId())
+        .username(user.getUsername())
+        .email(user.getEmail())
+        .name(user.getName())
+        .lastName(user.getLastName())
         .build();
   }
 

@@ -4,7 +4,8 @@ import lombok.*;
 
 import javax.persistence.*;
 
-import java.util.List;
+import java.util.HashSet;
+import java.util.Set;
 
 import static javax.persistence.GenerationType.IDENTITY;
 
@@ -25,15 +26,11 @@ public class UserEntity {
   @Column(name = "last_name")
   private String lastName;
 
+  @Column(name = "user_name")
   private String username;
 
   private String email;
 
-  @ManyToMany
-  @JoinTable(
-      name="booths_users",
-      joinColumns = @JoinColumn(name = "user_id"),
-      inverseJoinColumns = @JoinColumn(name = "booth_id")
-  )
-  private List<BoothEntity> booths;
+  @ManyToMany(mappedBy = "users")
+  private Set<BoothEntity> booths = new HashSet<>();
 }
