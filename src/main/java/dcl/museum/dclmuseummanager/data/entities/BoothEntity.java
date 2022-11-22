@@ -37,19 +37,19 @@ public class BoothEntity {
   private List<ArtworkEntity> artworks;
 
   @ManyToMany
-  @JoinTable(name = "booths_users",
+  @JoinTable(name = "booths_guests",
       joinColumns = @JoinColumn(name = "booth_id", referencedColumnName = "id"),
-      inverseJoinColumns = @JoinColumn(name = "user_id", referencedColumnName = "id")
+      inverseJoinColumns = @JoinColumn(name = "guest_id", referencedColumnName = "id")
   )
-  private Set<UserEntity> users = new java.util.LinkedHashSet<>();
+  private Set<UserEntity> guests = new java.util.LinkedHashSet<>();
 
   public void addUser(UserEntity user) {
-    this.users.add(user);
+    this.guests.add(user);
     user.getBooths().add(this);
   }
 
   public void removeUser(UserEntity user) {
-    users.remove(user);
+    guests.remove(user);
     user.getBooths().remove(this);
   }
 }

@@ -39,7 +39,7 @@ public class BoothController {
         .artistBio(booth.getArtistBio())
         .artistUrl(booth.getArtistUrl())
         .artworks(artworksToDto(booth.getArtworks()))
-        .users(usersToDto(booth.getUsers()))
+        .users(usersToDto(booth.getGuests()))
         .build();
   }
 

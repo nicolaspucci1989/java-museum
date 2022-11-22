@@ -31,6 +31,6 @@ public class UserEntity {
 
   private String email;
 
-  @ManyToMany(mappedBy = "users")
+  @ManyToMany(mappedBy = "guests")
   private Set<BoothEntity> booths = new HashSet<>();
 }

@@ -36,10 +36,10 @@ CREATE TABLE IF NOT EXISTS booths_artworks
     FOREIGN KEY (artwork_id) REFERENCES artworks (id)
 );
 
-CREATE TABLE IF NOT EXISTS booths_users
+CREATE TABLE IF NOT EXISTS booths_guests
 (
     booth_id BIGINT NOT NULL,
-    user_id  BIGINT NOT NULL,
+    guest_id  BIGINT NOT NULL,
     FOREIGN KEY (booth_id) REFERENCES booths (id),
-    FOREIGN KEY (user_id) REFERENCES users (id)
+    FOREIGN KEY (guest_id) REFERENCES users (id)
 );

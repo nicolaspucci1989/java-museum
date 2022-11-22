@@ -72,7 +72,7 @@ public class BoothDefaultGateway implements BoothGateway {
         .artistUrl(boothEntity.getArtistUrl())
         .expiresAt(boothEntity.getExpiresAt())
         .artworks(artworksToModels(boothEntity.getArtworks()))
-        .users(usersToModels(boothEntity.getUsers()))
+        .guests(usersToModels(boothEntity.getGuests()))
         .build();
   }
 
