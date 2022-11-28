@@ -5,13 +5,13 @@ import dcl.museum.dclmuseummanager.domain.booth.Booth;
 import dcl.museum.dclmuseummanager.domain.booth.BoothService;
 import dcl.museum.dclmuseummanager.domain.user.User;
 import lombok.*;
+import org.springframework.http.HttpStatus;
 import org.springframework.http.ResponseEntity;
-import org.springframework.web.bind.annotation.GetMapping;
-import org.springframework.web.bind.annotation.PathVariable;
-import org.springframework.web.bind.annotation.RequestMapping;
-import org.springframework.web.bind.annotation.RestController;
+import org.springframework.web.bind.annotation.*;
 
+import java.util.ArrayList;
 import java.util.List;
+import java.util.stream.Collectors;
 
 import static java.util.stream.Collectors.toList;
 
@@ -29,6 +29,38 @@ public class BoothController {
   @GetMapping("/{id}")
   public ResponseEntity<BoothDto> findById(@PathVariable Long id) throws Exception {
     return ResponseEntity.ok(toDetailDto(boothService.findById(id)));
+  }
+
+  @PostMapping
+  public ResponseEntity<BoothDto> create(@RequestBody BoothDto boothDto) {
+    Booth newBooth = boothDtoToDomain(boothDto);
+    Booth savedBooth = boothService.create(newBooth);
+    BoothDto savedBoothDto = toDetailDto(savedBooth);
+    return ResponseEntity.status(HttpStatus.CREATED).body(savedBoothDto);
+  }
+
+  private Booth boothDtoToDomain(BoothDto boothDto) {
+    return Booth.builder()
+        .artistUrl(boothDto.getArtistUrl())
+        .artistBio(boothDto.getArtistBio())
+        .artistName(boothDto.getArtistName())
+        .name(boothDto.getName())
+        .artworks(artworksDtosToModel(boothDto.getArtworks()))
+        .build();
+  }
+
+  private List<Artwork> artworksDtosToModel(List<ArtworkDto> artworks) {
+    if (artworks == null) return new ArrayList<>();
+
+    return artworks.stream().map(this::artworkDtoToModel)
+        .collect(Collectors.toList());
+  }
+
+  private Artwork artworkDtoToModel(ArtworkDto artworkDto) {
+    return Artwork.builder()
+        .name(artworkDto.getName())
+        .nftAddress(artworkDto.getNftAddress())
+        .build();
   }
 
   private BoothDto toDetailDto(Booth booth) {
@@ -104,10 +136,10 @@ public class BoothController {
     private String nftAddress;
     private String name;
   }
+
+  @Data
   @Builder
-  @Getter
-  @Setter
-  public static class BoothDto{
+  public static class BoothDto {
     private Long id;
     private String name;
     private String artistName;

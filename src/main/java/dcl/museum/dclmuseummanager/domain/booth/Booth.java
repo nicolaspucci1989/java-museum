@@ -7,6 +7,7 @@ import lombok.Getter;
 import lombok.Setter;
 
 import java.time.LocalDateTime;
+import java.util.ArrayList;
 import java.util.List;
 
 @Builder
@@ -18,7 +19,9 @@ public class Booth {
   private String artistName;
   private String artistBio;
   private String artistUrl;
-  private LocalDateTime expiresAt;
+  @Builder.Default
+  private LocalDateTime expiresAt = LocalDateTime.now();
   private List<Artwork> artworks;
-  private List<User> guests;
+  @Builder.Default
+  private List<User> guests = new ArrayList<>();
 }
