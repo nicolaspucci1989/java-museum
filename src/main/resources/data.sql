@@ -1,4 +1,4 @@
-USE `dcl-museum`;
+USE dclmuseum;
 
 INSERT INTO users (name, last_name, user_name, email)
 VALUES ('nicolas', 'pucci', 'nicowdk', 'nicowdk@gmail.com');

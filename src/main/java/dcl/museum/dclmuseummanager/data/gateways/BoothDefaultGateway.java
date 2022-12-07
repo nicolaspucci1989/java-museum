@@ -40,6 +40,8 @@ public class BoothDefaultGateway implements BoothGateway {
   @Override
   public Booth save(Booth booth) {
     BoothEntity boothEntity = boothToEntity(booth);
+    List<ArtworkEntity> boothsEntities = this.artworksToEntity(booth.getArtworks());
+    boothsEntities.forEach(boothEntity::addArtwork);
     BoothEntity savedBooth = boothRepository.save(boothEntity);
     return boothToModel(savedBooth);
   }
@@ -112,7 +114,7 @@ public class BoothDefaultGateway implements BoothGateway {
         .artistName(booth.getArtistName())
         .artistBio(booth.getArtistBio())
         .artistUrl(booth.getArtistUrl())
-        .artworks(artworksToEntity(booth.getArtworks()))
+        .expiresAt(booth.getExpiresAt())
         .build();
   }
 

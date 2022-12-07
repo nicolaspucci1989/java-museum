@@ -1,5 +1,6 @@
 package dcl.museum.dclmuseummanager.domain.booth;
 
+import dcl.museum.dclmuseummanager.web.controller.BoothController;
 import org.springframework.stereotype.Service;
 
 import java.util.List;
@@ -31,5 +32,9 @@ public class BoothService {
 
   public Booth update(Long id, Booth booth) {
     return boothGateway.update(id, booth);
+  }
+
+  public Booth create(Booth booth) {
+    return boothGateway.save(booth);
   }
 }

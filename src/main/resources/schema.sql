@@ -1,4 +1,4 @@
-USE `dcl-museum`;
+USE dclmuseum;
 
 CREATE TABLE IF NOT EXISTS booths
 (
